@@ -1,48 +1,47 @@
 "use client";
 import { useState } from "react";
-import { Cipher } from "crypto";
 
 // All this code by Jesse Jackson: https://jsejcksn.github.io/secrets/
 
-function decode(key: string, cipher: string) {
-  // Primary decode operation
-  let arrKey = key.split("");
-  let arrCipher = cipher.split("");
-  let arrKeyNum = uniEncode(arrKey);
-  let arrCipherNum = uniEncode(arrCipher);
-  let arrKeystream = [];
-  for (let i = 0; i < arrCipherNum.length; i++) {
-    let mult = returnInt(i / arrKeyNum.length);
-    let pos = i % arrKeyNum.length;
-    arrKeystream.push(arrKeyNum[pos] + mult);
-  }
-  let arrTextNum = [];
-  for (let j = 0; j < arrCipherNum.length; j++) {
-    arrTextNum.push((arrCipherNum[j] + 65536 - arrKeystream[j]) % 65536);
-  }
-  let arrText = uniDecode(arrTextNum);
-  let text = arrText.join("");
-  return text;
-}
+// function decode(key: string, cipher: string) {
+//   // Primary decode operation
+//   let arrKey = key.split("");
+//   let arrCipher = cipher.split("");
+//   let arrKeyNum = uniEncode(arrKey);
+//   let arrCipherNum = uniEncode(arrCipher);
+//   let arrKeystream = [];
+//   for (let i = 0; i < arrCipherNum.length; i++) {
+//     let mult = returnInt(i / arrKeyNum.length);
+//     let pos = i % arrKeyNum.length;
+//     arrKeystream.push(arrKeyNum[pos] + mult);
+//   }
+//   let arrTextNum = [];
+//   for (let j = 0; j < arrCipherNum.length; j++) {
+//     arrTextNum.push((arrCipherNum[j] + 65536 - arrKeystream[j]) % 65536);
+//   }
+//   let arrText = uniDecode(arrTextNum);
+//   let text = arrText.join("");
+//   return text;
+// }
 
 function encode(key: string, text: string) {
   // Primary encode operation
-  let arrKey = key.split("");
-  let arrText = text.split("");
-  let arrKeyNum = uniEncode(arrKey);
-  let arrTextNum = uniEncode(arrText);
-  let arrKeystream = [];
+  const arrKey = key.split("");
+  const arrText = text.split("");
+  const arrKeyNum = uniEncode(arrKey);
+  const arrTextNum = uniEncode(arrText);
+  const arrKeystream = [];
   for (let i = 0; i < arrTextNum.length; i++) {
-    let mult = returnInt(i / arrKeyNum.length);
-    let pos = i % arrKeyNum.length;
+    const mult = returnInt(i / arrKeyNum.length);
+    const pos = i % arrKeyNum.length;
     arrKeystream.push(arrKeyNum[pos] + mult);
   }
-  let arrCipherNum = [];
+  const arrCipherNum = [];
   for (let j = 0; j < arrTextNum.length; j++) {
     arrCipherNum.push((arrTextNum[j] + arrKeystream[j]) % 65536);
   }
-  let arrCipher = uniDecode(arrCipherNum);
-  let cipher = arrCipher.join("");
+  const arrCipher = uniDecode(arrCipherNum);
+  const cipher = arrCipher.join("");
   return cipher;
 }
 
