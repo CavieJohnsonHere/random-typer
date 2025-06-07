@@ -3,26 +3,26 @@ import { useState } from "react";
 
 // All this code by Jesse Jackson: https://jsejcksn.github.io/secrets/
 
-// function decode(key: string, cipher: string) {
-//   // Primary decode operation
-//   let arrKey = key.split("");
-//   let arrCipher = cipher.split("");
-//   let arrKeyNum = uniEncode(arrKey);
-//   let arrCipherNum = uniEncode(arrCipher);
-//   let arrKeystream = [];
-//   for (let i = 0; i < arrCipherNum.length; i++) {
-//     let mult = returnInt(i / arrKeyNum.length);
-//     let pos = i % arrKeyNum.length;
-//     arrKeystream.push(arrKeyNum[pos] + mult);
-//   }
-//   let arrTextNum = [];
-//   for (let j = 0; j < arrCipherNum.length; j++) {
-//     arrTextNum.push((arrCipherNum[j] + 65536 - arrKeystream[j]) % 65536);
-//   }
-//   let arrText = uniDecode(arrTextNum);
-//   let text = arrText.join("");
-//   return text;
-// }
+function decode(key: string, cipher: string) {
+  // Primary decode operation
+  const arrKey = key.split("");
+  const arrCipher = cipher.split("");
+  const arrKeyNum = uniEncode(arrKey);
+  const arrCipherNum = uniEncode(arrCipher);
+  const arrKeystream = [];
+  for (let i = 0; i < arrCipherNum.length; i++) {
+    const mult = returnInt(i / arrKeyNum.length);
+    const pos = i % arrKeyNum.length;
+    arrKeystream.push(arrKeyNum[pos] + mult);
+  }
+  const arrTextNum = [];
+  for (let j = 0; j < arrCipherNum.length; j++) {
+    arrTextNum.push((arrCipherNum[j] + 65536 - arrKeystream[j]) % 65536);
+  }
+  const arrText = uniDecode(arrTextNum);
+  const text = arrText.join("");
+  return text;
+}
 
 function encode(key: string, text: string) {
   // Primary encode operation
@@ -113,6 +113,23 @@ export default function Home() {
           }}
         >
           Encode
+        </button>
+        <span> Put the key here: </span>{" "}
+        <input
+          className="bg-amber-50/50 p-1 rounded text-black ms-2"
+          value={key}
+          onChange={(e) => setKey(e.target.value)}
+        />
+      </div>
+
+      <div className="mt-5">
+        <button
+          className="bg-gray-700 hover:bg-gray-800 transition rounded h-12 mx-1 text-white/80 cursor-pointer p-2"
+          onClick={() => {
+            setValue(decode(key, value));
+          }}
+        >
+          Decode
         </button>
         <span> Put the key here: </span>{" "}
         <input
