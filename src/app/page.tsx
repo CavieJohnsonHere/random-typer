@@ -1,8 +1,9 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function getRandomEnglishCharacter() {
-  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz            ,./\"'";
+  const chars =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz            ,./\"'";
   const randomIndex = Math.floor(Math.random() * chars.length);
   return chars[randomIndex];
 }
@@ -12,12 +13,10 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gray-950 p-10 text-white">
-      <h1 className="text-3xl mb-10">
-        Random Typer!
-      </h1>
+      <h1 className="text-3xl mb-10">Random Typer!</h1>
 
       <textarea
-      className="bg-gray-50 rounded w-96 h-64 text-black p-2 text-lg"
+        className="bg-gray-50 rounded w-96 h-64 text-black p-2 text-lg"
         value={value}
         onChange={(e) => {
           if (value.length < e.target.value.length) {
