@@ -37,7 +37,23 @@ export default function Home() {
           value={chars}
           onChange={(e) => setChars(e.target.value)}
         />
-        <button className="bg-gray-900 rounded h-12 mx-1 text-white/80 cursor-pointer p-2" onClick={() => setChars(defaultChars)}>Reset</button>
+        <button
+          className="bg-gray-700 hover:bg-gray-800 transition rounded h-12 mx-1 text-white/80 cursor-pointer p-2"
+          onClick={() => setChars(defaultChars)}
+        >
+          Reset
+        </button>
+      </div>
+      <div className="mt-5">
+        <button
+          className="bg-gray-700 hover:bg-gray-800 transition rounded h-12 mx-1 text-white/80 cursor-pointer p-2"
+          onClick={() => {
+            ;
+          }}
+        >
+          Decode the text using the key of
+          <input className="bg-amber-50/50 p-1 rounded text-black" />
+        </button>
       </div>
     </div>
   );

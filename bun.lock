@@ -7,7 +7,6 @@
         "next": "15.3.3",
         "react": "^19.0.0",
         "react-dom": "^19.0.0",
-        "secrets": "^1.1.5",
       },
       "devDependencies": {
         "@eslint/eslintrc": "^3",
@@ -688,8 +687,6 @@
     "safe-regex-test": ["safe-regex-test@1.1.0", "", { "dependencies": { "call-bound": "^1.0.2", "es-errors": "^1.3.0", "is-regex": "^1.2.1" } }, "sha512-x/+Cz4YrimQxQccJf5mKEbIa1NzeCRNI5Ecl/ekmlYaampdNLPalVyIcCZNNH3MvmqBugV5TMYZXv0ljslUlaw=="],
 
     "scheduler": ["scheduler@0.26.0", "", {}, "sha512-NlHwttCI/l5gCPR3D1nNXtWABUmBwvZpEQiD4IXSbIDq8BzLIK/7Ir5gTFSGZDUu37K5cMNp0hFtzO38sC7gWA=="],
-
-    "secrets": ["secrets@1.1.5", "", {}, "sha512-mRLug8yiqc+UzRYBq7F9e3d8HY/h1/8uMcGNmGUXcPBuC2x4njkPAaZc04+iOYaaapWRUU2M5tJTeq5Q6zCbIg=="],
 
     "semver": ["semver@6.3.1", "", { "bin": { "semver": "bin/semver.js" } }, "sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA=="],
 
