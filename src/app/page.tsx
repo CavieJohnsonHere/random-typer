@@ -45,24 +45,21 @@ function encode(key: string, text: string) {
   return cipher;
 }
 
-function returnInt(n: any) {
+function returnInt(n: number | string): number {
   // Staple function
-  return parseInt(n, 10);
+  return parseInt(n.toString(), 10);
 }
 
-function uniDecode(arr: any[]) {
+function uniDecode(arr: number[]): string[] {
   // Maps an array of Unicode values to their UTF-8 characters
-  return arr.map(function (x) {
-    return String.fromCharCode(x);
-  });
+  return arr.map((x) => String.fromCharCode(x));
 }
 
-function uniEncode(arr: any[]) {
+function uniEncode(arr: string[]): number[] {
   // Maps an array of UTF-8 characters to their Unicode values
-  return arr.map(function (x) {
-    return x.charCodeAt(0);
-  });
+  return arr.map((x) => x.charCodeAt(0));
 }
+
 
 function getRandomEnglishCharacter(chars: string) {
   const randomIndex = Math.floor(Math.random() * chars.length);
