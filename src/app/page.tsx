@@ -148,6 +148,21 @@ export default function Home() {
           onChange={(e) => setKey(e.target.value)}
         />
       </div>
+
+      <div className="mt-5">
+        <button
+          className="bg-gray-700 hover:bg-gray-800 transition rounded h-12 mx-1 text-white/80 cursor-pointer p-2"
+          onClick={() => {
+            setValue(
+              Array.from(new TextEncoder().encode(value))
+                .map((v) => v.toString(2))
+                .join(" ")
+            );
+          }}
+        >
+          Turn into bytes
+        </button>
+      </div>
     </div>
   );
 }
