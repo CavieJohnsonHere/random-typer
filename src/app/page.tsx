@@ -60,7 +60,6 @@ function uniEncode(arr: string[]): number[] {
   return arr.map((x) => x.charCodeAt(0));
 }
 
-
 function getRandomEnglishCharacter(chars: string) {
   const randomIndex = Math.floor(Math.random() * chars.length);
   return chars[randomIndex];
@@ -72,6 +71,7 @@ export default function Home() {
   const [value, setValue] = useState("Start typing!!!");
   const [chars, setChars] = useState(defaultChars);
   const [key, setKey] = useState("gulp");
+  const [noobMode, setNoobMode] = useState(false);
 
   return (
     <div className="min-h-screen bg-gray-950 p-10 text-white">
@@ -80,13 +80,23 @@ export default function Home() {
         className={`bg-gray-50 rounded w-96 h-64 text-black p-2 text-lg`}
         value={value}
         onChange={(e) => {
-          if (value.length < e.target.value.length) {
+          if (noobMode) {
+            setValue(e.target.value);
+          } else if (value.length < e.target.value.length) {
             setValue(value + getRandomEnglishCharacter(chars));
           } else {
             setValue(e.target.value);
           }
         }}
       />
+
+      <div className="mt-5">
+        <span onClick={() => setNoobMode(!noobMode)}>
+          <input type="checkbox" value={noobMode ? "on" : "off"} />{" "}
+          <span>Noob mode</span>
+        </span>
+      </div>
+
       <div className="mt-5">
         <span>
           You can change the character string here. Characters apear more
