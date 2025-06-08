@@ -40,7 +40,7 @@ export default function Share({
         className="bg-gray-700 hover:bg-gray-800 transition rounded h-12 mx-1 text-white/80 cursor-pointer p-2"
         onClick={onGetClicked}
       >
-        Get other people's text.
+        Get other people&apos;s text.
       </button>
 
       <div className="mt-2">
