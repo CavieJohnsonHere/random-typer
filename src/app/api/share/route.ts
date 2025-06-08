@@ -1,16 +1,16 @@
 type StoreValue = {
-  value: any;
+  value: string | number | object;
   expires: number;
 };
 
 const store = new Map<string, StoreValue>();
 
-function setWithExpiry(key: string, value: any, ttl: number) {
+function setWithExpiry(key: string, value: string | number | object, ttl: number) {
   const expires = Date.now() + ttl;
   store.set(key, { value, expires });
 }
 
-function getIfValid(key: string): any | null {
+function getIfValid(key: string): string | number | object | null {
   const entry = store.get(key);
   if (!entry) return null;
   if (Date.now() > entry.expires) {
@@ -21,25 +21,37 @@ function getIfValid(key: string): any | null {
 }
 
 export async function POST(request: Request) {
+  let body: unknown;
   try {
-    const { key, data }: { key?: string; data?: any } = await request.json();
-    if (!key || typeof data === 'undefined') {
-      return new Response(
-        JSON.stringify({ error: 'Key and data are required' }),
-        { status: 400, headers: { 'Content-Type': 'application/json' } }
-      );
-    }
-    setWithExpiry(key, data, 5 * 60 * 1000); // 5 minutes
-    return new Response(
-      JSON.stringify({ message: 'Data stored successfully' }),
-      { status: 200, headers: { 'Content-Type': 'application/json' } }
-    );
-  } catch (err) {
+    body = await request.json();
+  } catch {
     return new Response(
       JSON.stringify({ error: 'Invalid JSON' }),
       { status: 400, headers: { 'Content-Type': 'application/json' } }
     );
   }
+
+  // Type guard for expected shape
+  if (
+    typeof body !== 'object' ||
+    body === null ||
+    !('key' in body) ||
+    !('data' in body) ||
+    typeof (body as { key: unknown }).key !== 'string'
+  ) {
+    return new Response(
+      JSON.stringify({ error: 'Key and data are required' }),
+      { status: 400, headers: { 'Content-Type': 'application/json' } }
+    );
+  }
+
+  const { key, data } = body as { key: string; data: string | number | object };
+  setWithExpiry(key, data, 5 * 60 * 1000); // 5 minutes
+
+  return new Response(
+    JSON.stringify({ message: 'Data stored successfully' }),
+    { status: 200, headers: { 'Content-Type': 'application/json' } }
+  );
 }
 
 export async function GET(request: Request) {
