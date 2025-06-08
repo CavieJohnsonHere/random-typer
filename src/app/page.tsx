@@ -92,10 +92,8 @@ export default function Home() {
         />
 
         <div className="mt-5">
-          <span onClick={() => setNoobMode(!noobMode)}>
-            <input type="checkbox" value={noobMode ? "on" : "off"} />{" "}
+            <input type="checkbox" value={noobMode ? "on" : "off"} onChange={() => setNoobMode(!noobMode)} />{" "}
             <span>Noob mode</span>
-          </span>
         </div>
       </div>
 
