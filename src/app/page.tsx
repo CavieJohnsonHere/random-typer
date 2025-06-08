@@ -74,94 +74,98 @@ export default function Home() {
   const [noobMode, setNoobMode] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gray-950 p-10 text-white">
-      <h1 className="text-3xl mb-10">Random Typer!</h1>
-      <textarea
-        className={`bg-gray-50 rounded w-96 h-64 text-black p-2 text-lg`}
-        value={value}
-        onChange={(e) => {
-          if (noobMode) {
-            setValue(e.target.value);
-          } else if (value.length < e.target.value.length) {
-            setValue(value + getRandomEnglishCharacter(chars));
-          } else {
-            setValue(e.target.value);
-          }
-        }}
-      />
-
-      <div className="mt-5">
-        <span onClick={() => setNoobMode(!noobMode)}>
-          <input type="checkbox" value={noobMode ? "on" : "off"} />{" "}
-          <span>Noob mode</span>
-        </span>
-      </div>
-
-      <div className="mt-5">
-        <span>
-          You can change the character string here. Characters apear more
-          frequently if you put more of them here:{" "}
-        </span>
-        <input
-          type="text"
-          className="bg-gray-50 text-black p-2 rounded h-12 mx-1"
-          value={chars}
-          onChange={(e) => setChars(e.target.value)}
-        />
-        <button
-          className="bg-gray-700 hover:bg-gray-800 transition rounded h-12 mx-1 text-white/80 cursor-pointer p-2"
-          onClick={() => setChars(defaultChars)}
-        >
-          Reset
-        </button>
-      </div>
-      <div className="mt-5">
-        <button
-          className="bg-gray-700 hover:bg-gray-800 transition rounded h-12 mx-1 text-white/80 cursor-pointer p-2"
-          onClick={() => {
-            setValue(encode(key, value));
+    <div className="min-h-screen bg-gray-950 text-white grid grid-cols-3">
+      <div className="col-span-2 p-10">
+        <h1 className="text-3xl mb-10">Random Typer!</h1>
+        <textarea
+          className={`bg-gray-50 rounded w-96 h-64 text-black p-2 text-lg`}
+          value={value}
+          onChange={(e) => {
+            if (noobMode) {
+              setValue(e.target.value);
+            } else if (value.length < e.target.value.length) {
+              setValue(value + getRandomEnglishCharacter(chars));
+            } else {
+              setValue(e.target.value);
+            }
           }}
-        >
-          Encode
-        </button>
-        <span> Put the key here: </span>{" "}
-        <input
-          className="bg-amber-50/50 p-1 rounded text-black ms-2"
-          value={key}
-          onChange={(e) => setKey(e.target.value)}
         />
+
+        <div className="mt-5">
+          <span onClick={() => setNoobMode(!noobMode)}>
+            <input type="checkbox" value={noobMode ? "on" : "off"} />{" "}
+            <span>Noob mode</span>
+          </span>
+        </div>
       </div>
 
-      <div className="mt-5">
-        <button
-          className="bg-gray-700 hover:bg-gray-800 transition rounded h-12 mx-1 text-white/80 cursor-pointer p-2"
-          onClick={() => {
-            setValue(decode(key, value));
-          }}
-        >
-          Decode
-        </button>
-        <span> Put the key here: </span>{" "}
-        <input
-          className="bg-amber-50/50 p-1 rounded text-black ms-2"
-          value={key}
-          onChange={(e) => setKey(e.target.value)}
-        />
-      </div>
+      <div className="p-10 bg-gray-900">
+        <div>
+          <span>
+            You can change the character string here. Characters apear more
+            frequently if you put more of them here:{" "}
+          </span>
+          <input
+            type="text"
+            className="bg-gray-50 text-black p-2 rounded h-12 mx-1"
+            value={chars}
+            onChange={(e) => setChars(e.target.value)}
+          />
+          <button
+            className="bg-gray-700 hover:bg-gray-800 transition rounded h-12 mx-1 text-white/80 cursor-pointer p-2"
+            onClick={() => setChars(defaultChars)}
+          >
+            Reset
+          </button>
+        </div>
+        <div className="mt-5">
+          <button
+            className="bg-gray-700 hover:bg-gray-800 transition rounded h-12 mx-1 text-white/80 cursor-pointer p-2"
+            onClick={() => {
+              setValue(encode(key, value));
+            }}
+          >
+            Encode
+          </button>
+          <span> Put the key here: </span>{" "}
+          <input
+            className="bg-amber-50/50 focus:bg-amber-100/60 transition text-white p-1 rounded ms-2"
+            value={key}
+            onChange={(e) => setKey(e.target.value)}
+          />
+        </div>
 
-      <div className="mt-5">
-        <button
-          className="bg-gray-700 hover:bg-gray-800 transition rounded h-12 mx-1 text-white/80 cursor-pointer p-2"
-          onClick={() => {
-            setValue(
-              Array.from(new TextEncoder().encode(value))
-                .map((v) => v.toString(2))
-                .join(" ")
-            );
-          }}
-        >
-          Turn into bytes
-        </button>
+        <div className="mt-5">
+          <button
+            className="bg-gray-700 hover:bg-gray-800 transition rounded h-12 mx-1 text-white/80 cursor-pointer p-2"
+            onClick={() => {
+              setValue(decode(key, value));
+            }}
+          >
+            Decode
+          </button>
+          <span> Put the key here: </span>{" "}
+          <input
+            className="bg-amber-50/50 focus:bg-amber-100/60 transition text-white p-1 rounded ms-2"
+            value={key}
+            onChange={(e) => setKey(e.target.value)}
+          />
+        </div>
+
+        <div className="mt-5">
+          <button
+            className="bg-gray-700 hover:bg-gray-800 transition rounded h-12 mx-1 text-white/80 cursor-pointer p-2"
+            onClick={() => {
+              setValue(
+                Array.from(new TextEncoder().encode(value))
+                  .map((v) => v.toString(2))
+                  .join(" ")
+              );
+            }}
+          >
+            Turn into bytes
+          </button>
+        </div>
       </div>
     </div>
   );
