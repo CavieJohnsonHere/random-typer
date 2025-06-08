@@ -24,7 +24,7 @@ export default function Share({
 
   const onGetClicked = async () => {
     const res = await fetch(`/api/share?key=${key}`);
-    if (res.ok) setValue((await res.json()).text);
+    if (res.ok) setValue(JSON.parse(await res.text()).data);
   };
 
   return (
