@@ -30,7 +30,7 @@ export default function Share({
   return (
     <div>
       <button
-        className="bg-gray-700 hover:bg-gray-800 transition rounded h-12 mx-1 text-white/80 cursor-pointer p-2"
+        className="bg-gray-700 hover:bg-gray-800 transition rounded h-12 me-1 text-white/80 cursor-pointer p-2"
         onClick={onShareClicked}
       >
         Share your text.
