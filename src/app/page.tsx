@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Share from "./components/share";
 
 // All this code by Jesse Jackson: https://jsejcksn.github.io/secrets/
 
@@ -163,6 +164,10 @@ export default function Home() {
           >
             Turn into bytes
           </button>
+        </div>
+
+        <div className="absolute bottom-0 py-2">
+          <Share value={value} setValue={setValue} />
         </div>
       </div>
     </div>
