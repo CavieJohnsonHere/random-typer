@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 export default function Share({
   value,
@@ -10,6 +10,8 @@ export default function Share({
   setValue: React.Dispatch<React.SetStateAction<string>>;
 }) {
   const [key, setKey] = useState("greetings!");
+  const [message, setMessage] = useState("");
+  const error = useRef<HTMLDivElement | null>(null);
 
   const onShareClicked = async () => {
     await fetch("/api/share", {
@@ -25,10 +27,28 @@ export default function Share({
   const onGetClicked = async () => {
     const res = await fetch(`/api/share?key=${key}`);
     if (res.ok) setValue(JSON.parse(await res.text()).data);
+    else {
+      setMessage(JSON.parse(await res.text()).error);
+      setTimeout(() => {
+        if (error && error.current) error.current.style.opacity = `0`;
+      }, 1800);
+
+      setTimeout(() => {
+        setMessage("");
+      }, 2000);
+    }
   };
 
   return (
-    <div>
+    <div className="p-2">
+      {message && (
+        <div
+          className="absolute bottom-5 end-5 bg-red-900/40 backdrop-blur-md rounded-4xl w-fit h-12 p-2 px-4 leading-8 transition-opacity duration-[200ms]"
+          ref={error}
+        >
+          {message}
+        </div>
+      )}
       <button
         className="bg-gray-700 hover:bg-gray-800 transition rounded h-12 me-1 text-white/80 cursor-pointer p-2"
         onClick={onShareClicked}

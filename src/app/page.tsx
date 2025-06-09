@@ -75,7 +75,7 @@ export default function Home() {
   const [noobMode, setNoobMode] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gray-950 text-white grid grid-cols-3">
+    <div className="min-h-screen bg-gray-950 text-white grid grid-cols-3 relative">
       <div className="col-span-2 p-10">
         <h1 className="text-3xl mb-10">Random Typer!</h1>
         <textarea
