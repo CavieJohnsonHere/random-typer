@@ -98,7 +98,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="p-10 bg-gray-900">
+      <div className="p-10 bg-gray-900 my-5 rounded-s-2xl">
         <div>
           <span>
             You can change the character string here. Characters apear more
@@ -166,7 +166,7 @@ export default function Home() {
           </button>
         </div>
 
-        <div className="md:absolute bottom-0 py-2">
+        <div className="md:absolute bottom-15">
           <Share value={value} setValue={setValue} />
         </div>
       </div>
